@@ -24,5 +24,5 @@ drag it to where you would like to have it!
 
 == Screenshots ==
 
-
-`<?php code(); // goes in backticks ?>`
+1. screenshot-1.jpg
+2. screenshot-1.jpg
