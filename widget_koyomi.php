@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name:  Japanese Koyomi Widget
-Plugin URI: http://www.vjcatkick.com/?page_id=
+Plugin URI: http://www.vjcatkick.com/?page_id=5150
 Description: Display Japanese 'Koyomi' on your sidebar with moon phase.
 Version: 0.0.2
 Author: V.J.Catkick
