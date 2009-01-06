@@ -1,4 +1,4 @@
-=== Koyomi Widget ===
+=== Koyomi ===
 Contributors: V.J.Catkick
 Donate link: http://www.vjcatkick.com/
 Tags: Japanese calendar, koyomi, moon phase, sidebar
