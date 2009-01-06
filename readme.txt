@@ -6,7 +6,7 @@ Requires at least: 2.5
 Tested up to: 2.7
 Stable tag: 4.3
 
-To show current moon phase, dates, and Japanese old dates
+Display current moon phase, dates, and Japanese old dates with graphical images.
 
 == Description ==
 
