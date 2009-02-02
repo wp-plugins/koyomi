@@ -12,6 +12,7 @@ Display current moon phase, dates, and Japanese old dates with graphical images.
 
 To show current moon phase, dates, and Japanese old dates. Also, this shows Japanese 'roku-you' old six-day-based calendar with kanji character (you do not install Japanese font, it is graphic). Pointing it shows description.
 
+Now the date format is supported. Use option panel to setup your own date format with PHP date format such as 'M/d/Y' etc.
 
 == Installation ==
 

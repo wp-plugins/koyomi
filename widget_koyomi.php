@@ -3,7 +3,7 @@
 Plugin Name:  Japanese Koyomi Widget
 Plugin URI: http://www.vjcatkick.com/?page_id=5150
 Description: Display Japanese 'Koyomi' on your sidebar with moon phase.
-Version: 0.0.2
+Version: 0.0.3
 Author: V.J.Catkick
 Author URI: http://www.vjcatkick.com/
 */
@@ -41,6 +41,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 - Initial release
 * Thur Jan 01 2009 - v0.0.2
 - Initial release - svn
+* Feb 02 2009 - v0.0.3
+- support date format, added 31th moon phase
 */
 
 if ( !function_exists('_get_moon_phase_koyomi') ) :
@@ -177,7 +179,13 @@ if ( !function_exists('_get_old_koyomi_todays_str') ) :
 function _get_old_koyomi_todays_str() {
 	$oldd = _calc_old_koyomi_today();
 
-	$targetstr =  $oldd[year] . '/' . $oldd[month] . '/' . $oldd[day];
+	// 0.0.3
+	$options = get_option('widget_j_koyomi');
+	$j_koyomi_date_format = $options['j_koyomi_date_format'];
+	if( !$j_koyomi_date_format ) $j_koyomi_date_format = 'm/d/Y';
+	$theTime = mktime( 0,0,0, $oldd[month], $oldd[day], $oldd[year]  );
+	$targetstr = date( $j_koyomi_date_format, $theTime );
+//	$targetstr =  $oldd[year] . '/' . $oldd[month] . '/' . $oldd[day];
 
 	return $targetstr;
 } /* _get_old_koyomi_todays_str() */
@@ -188,7 +196,14 @@ function _get_new_koyomi_todays_str() {
 	$y = _get_today_value( 'Y' );
 	$m = _get_today_value( 'M' );
 	$d = _get_today_value( 'D' );
-	$targetstr =  $y . '/' . $m . '/' . $d;
+
+	// 0.0.3
+	$options = get_option('widget_j_koyomi');
+	$j_koyomi_date_format = $options['j_koyomi_date_format'];
+	if( !$j_koyomi_date_format ) $j_koyomi_date_format = 'm/d/Y';
+	$theTime = mktime( 0,0,0, $m, $d, $y );
+	$targetstr = date( $j_koyomi_date_format, $theTime );
+//	$targetstr =  $y . '/' . $m . '/' . $d;
 
 	return $targetstr;
 } /* _get_new_koyomi_todays_str() */
@@ -280,6 +295,7 @@ function widget_j_koyomi_init() {
 		$options = $newoptions = get_option('widget_j_koyomi');
 		if ( $_POST["j_koyomi_src_submit"] ) {
 			$newoptions['j_koyomi_src_title'] = strip_tags(stripslashes($_POST["j_koyomi_src_title"]));
+			$newoptions['j_koyomi_date_format'] = $_POST["j_koyomi_date_format"];
 		}
 		if ( $options != $newoptions ) {
 			$options = $newoptions;
@@ -287,11 +303,15 @@ function widget_j_koyomi_init() {
 		}
 
 		// those are default value
+		if ( !$options['j_koyomi_date_format'] ) $options['j_koyomi_date_format'] = 'm/d/Y';
+
 
 		$title = htmlspecialchars($options['j_koyomi_src_title'], ENT_QUOTES);
+		$j_koyomi_date_format = $options['j_koyomi_date_format'];
 ?>
 
 	    <?php _e('Title:'); ?> <input style="width: 170px;" id="j_koyomi_src_title" name="j_koyomi_src_title" type="text" value="<?php echo $title; ?>" /><br />
+	    <?php _e('Format:'); ?> <input style="width: 170px;" id="j_koyomi_date_format" name="j_koyomi_date_format" type="text" value="<?php echo $j_koyomi_date_format; ?>" /><br />
 
   	    <input type="hidden" id="j_koyomi_src_submit" name="j_koyomi_src_submit" value="1" />
 
