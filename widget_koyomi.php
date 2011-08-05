@@ -3,7 +3,7 @@
 Plugin Name:  Japanese Koyomi Widget
 Plugin URI: http://www.vjcatkick.com/?page_id=5150
 Description: Display Japanese 'Koyomi' on your sidebar with moon phase.
-Version: 0.0.3
+Version: 0.0.4
 Author: V.J.Catkick
 Author URI: http://www.vjcatkick.com/
 */
@@ -43,6 +43,8 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 - Initial release - svn
 * Feb 02 2009 - v0.0.3
 - support date format, added 31th moon phase
+* Aug 05 2011 - v0.0.4
+- fixed timing issue on wp
 */
 
 if ( !function_exists('_get_moon_phase_koyomi') ) :
@@ -66,13 +68,13 @@ if ( !function_exists('_get_today_value') ) :
 function _get_today_value( $op ) {
 	switch( $op ) {
 		case 'Y':
-			return date( 'Y' );
+			return date( 'Y' , ( time() + 3600 * get_option( 'gmt_offset' ) ) );	// 0.0.4 timing issue fixed
 			break;
 		case 'M':
-			return date( 'n' );
+			return date( 'n'  , ( time() + 3600 * get_option( 'gmt_offset' ) ) );
 			break;
 		case 'D':
-			return date( 'j' );
+			return date( 'j'  , ( time() + 3600 * get_option( 'gmt_offset' ) ) );
 			break;
 		default:
 			return 0;
